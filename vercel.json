@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "./script.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "./api/excute/route",
+      "dest": "./api/execute/route.ts"
+    }
+  ]
+}
