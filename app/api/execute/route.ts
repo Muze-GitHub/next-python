@@ -4,7 +4,7 @@ import { promisify } from 'util'
 
 const execAsync = promisify(exec)
 
-let cache = null // 在内存中缓存数据
+let cache: any = null // 在内存中缓存数据
 
 // 读取并缓存 pickle 文件数据
 async function loadData() {
