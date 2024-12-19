@@ -14,6 +14,8 @@ export default function Home() {
     e.preventDefault()
     setLoading(true)
     try {
+      const res = await (await fetch('/api/execute')).json()
+      console.log(res,'---ssss')
       const response = await fetch('/api/execute', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

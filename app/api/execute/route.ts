@@ -29,3 +29,18 @@ export async function POST(req: Request) {
     )
   }
 }
+
+export async function GET() {
+  try {
+    // 尝试执行 python3 --version 命令
+    const { stdout, stderr } = await execAsync('python3 --version')
+    if (stderr) {
+      console.error('stderr:', stderr)
+      return NextResponse.json({ error: 'Python3 not found.' }, { status: 500 })
+    }
+    return NextResponse.json({ python_version: stdout }, { status: 200 })
+  } catch (error) {
+    console.error('Error:', error)
+    return NextResponse.json({ error: 'Failed to detect Python3.' }, { status: 500 })
+  }
+}
