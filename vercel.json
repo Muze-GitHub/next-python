@@ -13,11 +13,5 @@
       "src": "script.py",
       "use": "@vercel/python"
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/execute/route",
-      "dest": "/api/execute/route.ts"
-    }
   ]
 }
