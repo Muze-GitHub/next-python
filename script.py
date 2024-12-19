@@ -24,12 +24,12 @@ def query_key(input_key):
         result = Counter(data[input_key])  # 假设值是可统计的列表，计算 Counter
         return json.dumps(result, ensure_ascii=False)  # 输出 JSON 格式，保留中文
     else:
-        return json.dumps({"error": f"Key '{input_key}' not found"}, ensure_ascii=False)
+        return json.dumps({"error": f"没有找到 '{input_key}' 相关的场景关联词"}, ensure_ascii=False)
 
 # 处理传入参数
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print(json.dumps({"error": "No input provided"}, ensure_ascii=False))
+        print(json.dumps({"error": "请输入场景关联词"}, ensure_ascii=False))
         sys.exit(1)
 
     if sys.argv[1] == 'load':

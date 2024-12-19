@@ -1,16 +1,19 @@
 import { NextResponse } from 'next/server'
 import { exec } from 'child_process'
 import { promisify } from 'util'
+import path from 'node:path'
 
 const execAsync = promisify(exec)
 
 let cache: any = null // 在内存中缓存数据
 
+const scriptPath = path.resolve('script.py')  // 使用绝对路径
+
 // 读取并缓存 pickle 文件数据
 async function loadData() {
   if (!cache) {
     try {
-      const { stdout, stderr } = await execAsync('python3 script.py load') // 调用 Python 加载文件
+      const { stdout, stderr } = await execAsync(`python3 ${scriptPath}  load`) // 调用 Python 加载文件
       if (stderr) {
         console.error('stderr:', stderr)
         return { error: stderr }
@@ -35,7 +38,7 @@ export async function POST(req: Request) {
     }
 
     // 传递用户输入给 Python 脚本
-    const { stdout, stderr } = await execAsync(`python3 script.py "${input}"`) // 调用 Python 查询
+    const { stdout, stderr } = await execAsync(`python3 ${scriptPath}  "${input}"`) // 调用 Python 查询
     if (stderr) {
       console.error('stderr:', stderr)
       return NextResponse.json({ error: stderr }, { status: 500 })
@@ -47,7 +50,7 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error('Error:', error)
     return NextResponse.json(
-      { error: 'An error occurred while processing your request.' },
+      { error: '请求错误' },
       { status: 500 }
     )
   }
