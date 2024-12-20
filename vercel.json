@@ -1,9 +1,0 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "functions": {
-    "api/*.ts": {
-      "runtime": "python3.9.6"
-    }
-  },
-  "buildCommand": "pip install -r requirements.txt"
-}
